@@ -6,10 +6,6 @@ using UnityEngine;
 
 namespace HappyHarvest
 {
-    /// <summary>
-    /// When a weather is set on this system, it will find all WeatherSystemElement in the scene and enable the one that
-    /// match the set weather and disable the ones that doesn't match.
-    /// </summary>
     public class WeatherSystem : MonoBehaviour
     {
         [Flags]

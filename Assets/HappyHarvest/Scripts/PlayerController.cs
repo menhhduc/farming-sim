@@ -26,10 +26,7 @@ namespace HappyHarvest
 
         public InventorySystem Inventory => m_Inventory;
         public Animator Animator => m_Animator;
-
-        //This is private as we don't want to be able to set coins without going through the accessor above that ensure
-        //the UI is updated, but is tagged as SerializedField so it appear in the editor so designer can set the starting
-        //amount of coins
+        
         [SerializeField]
         private int m_Coins = 10;
 
@@ -80,8 +77,6 @@ namespace HappyHarvest
             m_TargetMarker = Target.GetComponent<TargetMarker>();
             m_TargetMarker.Hide();
             
-            //we can only set DontDestroyOnLoad root object, so ensure its root (Level Designer sometime place the character
-            //prefab already in the scene and can sometime tuck it under other object in the hierarchy)
             gameObject.transform.SetParent(null);
             
             GameManager.Instance.Player = this;
@@ -90,9 +85,6 @@ namespace HappyHarvest
         
         void Start()
         {
-            //Retrieve the action from the InputAction asset, enable them and add the callbacks.
-            
-            //Move action doesn't have any callback as it will be polled in the movement code directly.
             m_MoveAction = InputAction.FindAction("Gameplay/Move");
             m_MoveAction.Enable();
 
@@ -237,15 +229,12 @@ namespace HappyHarvest
         void FixedUpdate()
         {
             var move = m_MoveAction.ReadValue<Vector2>();
-
-            //note: == and != for vector2 is overriden to take in account floating point imprecision.
             if (move != Vector2.zero)
             {
                 SetLookDirectionFrom(move);
             }
             else
             {
-                //we aren't moving, look direction is based on the currently aimed toward point
                 if (IsMouseOverGameWindow())
                 {
                     Vector3 posToMouse = m_CurrentWorldMousePos - transform.position;
@@ -370,7 +359,6 @@ namespace HappyHarvest
                 {
                     if (!visual.Instance.activeInHierarchy)
                     {
-                        //enable all parent as if it's disabled, value cannot be set
                         var current = visual.Instance.transform;
                         while (current != null)
                         {
@@ -387,10 +375,8 @@ namespace HappyHarvest
             
             if (m_Inventory.EquippedItem == null)
             {
-                //this mean we finished using an item, the entry is now empty, so we need to disable the visual if any
                 if (previousEquipped != null)
                 {
-                    //This is a bit of a quick fix, this will let any animation to finish playing before we disable the visual.
                     StartCoroutine(DelayedObjectDisable(previousEquipped));
                 }
             }

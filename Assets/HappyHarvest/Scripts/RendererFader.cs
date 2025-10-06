@@ -20,7 +20,6 @@ namespace HappyHarvest
 
 		void Start()
 		{
-			//curve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 1));
 			curve.preWrapMode = WrapMode.Once;
 			curve.postWrapMode = WrapMode.ClampForever;
 			if (RendererToHide != null)

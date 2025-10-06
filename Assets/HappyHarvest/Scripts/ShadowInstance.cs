@@ -7,7 +7,6 @@ using UnityEngine;
 
 namespace HappyHarvest
 {
-//execute late to be sure the manager are instantiated 
     [DefaultExecutionOrder(999)]
     [ExecuteInEditMode]
     public class ShadowInstance : MonoBehaviour

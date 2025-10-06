@@ -30,7 +30,7 @@ namespace HappyHarvest
             playerTransform.position = transform.position;
 
             if (GameManager.Instance.MainCamera != null)
-            {//some scene, like interior, may have fixed camera, so no need to change anything
+            {
                 GameManager.Instance.MainCamera.Follow = playerTransform;
                 GameManager.Instance.MainCamera.LookAt = playerTransform;
                 GameManager.Instance.MainCamera.ForceCameraPosition(playerTransform.position, Quaternion.identity);

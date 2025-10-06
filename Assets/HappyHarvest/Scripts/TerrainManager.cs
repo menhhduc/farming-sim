@@ -7,10 +7,6 @@ using UnityEngine.VFX;
 
 namespace HappyHarvest
 {
-    /// <summary>
-    /// Manage everything related to the terrain where crop are planted. Hold the content of cells with the states of
-    /// crop in those cells. Handle also switching tiles and the like where tilling and watering happens.
-    /// </summary>
     public class TerrainManager : MonoBehaviour
     {
         [System.Serializable]
@@ -179,7 +175,6 @@ namespace HappyHarvest
             groundData.WaterTimer = GroundData.WaterDuration;
             
             WaterTilemap.SetTile(target, WateredTile);
-            //GroundTilemap.SetColor(target, WateredTiledColorTint);
         }
 
         public Crop HarvestAt(Vector3Int target)
@@ -247,7 +242,6 @@ namespace HappyHarvest
                     if (groundData.WaterTimer <= 0.0f)
                     {
                         WaterTilemap.SetTile(cell, null);
-                        //GroundTilemap.SetColor(cell, Color.white);
                     }
                 }
 
@@ -327,10 +321,8 @@ namespace HappyHarvest
                 GroundTilemap.SetTile(pos, TilledTile);
                 
                 WaterTilemap.SetTile(data.GroundDataPositions[i], data.GroundDatas[i].WaterTimer > 0.0f ? WateredTile : null);
-                //GroundTilemap.SetColor(data.GroundDataPositions[i], data.GroundDatas[i].WaterTimer > 0.0f ? WateredTiledColorTint : Color.white);
             }
 
-            //clear all existing effect as we will reload new one
             foreach (var pool in m_HarvestEffectPool)
             {
                 if (pool.Value != null)

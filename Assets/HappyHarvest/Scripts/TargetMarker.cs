@@ -19,8 +19,7 @@ namespace HappyHarvest
         {
             _renderer = GetComponent<SpriteRenderer>();
         }
-
-        // Start is called before the first frame update
+        
         public void Activate()
         {
             Show();
